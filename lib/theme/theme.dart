@@ -5,6 +5,7 @@ ThemeData theme() {
   return ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: kPrimaryColor,
+    scaffoldBackgroundColor: Colors.white,
     //textButtonTheme: _buttonTextTheme(),
   );
 }

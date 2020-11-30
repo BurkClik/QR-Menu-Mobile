@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Color(0xFFF93F7E);
+const kSecondColor = Color(0xFFFC8B8E);
 
 //==================================
 // Sign In and Out
@@ -37,4 +38,33 @@ const kSignInOutText = TextStyle(
   fontFamily: 'Kodchasan',
   fontWeight: FontWeight.w600,
   fontSize: 20.0,
+);
+
+//====================================
+// Waiter Page
+//====================================
+const kLastActivitiesText = TextStyle(
+  color: kSecondColor,
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+  decoration: TextDecoration.underline,
+);
+
+const kItemBoxShadow = BoxShadow(
+  color: Color(0x40000000),
+  blurRadius: 4,
+  offset: Offset(0, 4),
+);
+
+const kOrderDetailText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+);
+
+const kOrderTimeText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  fontSize: 12,
+  color: kBlackWithOpacity,
 );

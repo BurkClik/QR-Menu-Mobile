@@ -16,6 +16,7 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       body: SafeArea(
         child: Center(
           child: Column(
@@ -54,7 +55,9 @@ class SignInPage extends StatelessWidget {
               CustomRaisedButton(
                 text: 'Giriş',
                 onPressed: () {
-                  print(emailController.text.trim());
+                  context.read<AuthenticationService>().signIn(
+                      email: emailController.text.trim(),
+                      password: passwordController.text.trim());
                 },
               ),
               SizedBox(height: getProportionateScreenHeight(12)),
