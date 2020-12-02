@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile/screens/history.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   static int _currentScreen = 1;
   final List<Widget> screenList = [History(), HomeBody(), Profile()];
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,16 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<AuthenticationService>().signOut();
+              auth
+                  .fetchSignInMethodsForEmail(auth.currentUser.email)
+                  .then((value) {
+                if (value[0] == "password") {
+                  context.read<AuthenticationService>().signOut();
+                } else {
+                  context.read<AuthenticationService>().googleignOut();
+                  Navigator.of(context).pushReplacementNamed("/signIn");
+                }
+              });
             },
             icon: Icon(Icons.exit_to_app, color: kSecondColor),
           ),

@@ -6,8 +6,16 @@ class SignInputArea extends StatelessWidget {
   final TextEditingController textEditingController;
   final Widget prefixIcon;
   final String labelText;
+  final TextInputType textInputType;
+  final bool obsecure;
 
-  SignInputArea({this.textEditingController, this.labelText, this.prefixIcon});
+  SignInputArea(
+      {this.textEditingController,
+      this.labelText,
+      this.prefixIcon,
+      this.textInputType,
+      obsecure})
+      : obsecure = obsecure ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,8 @@ class SignInputArea extends StatelessWidget {
       width: getProportionateScreenWidth(304),
       height: getProportionateScreenHeight(48),
       child: TextField(
+        keyboardType: textInputType,
+        obscureText: obsecure,
         controller: textEditingController,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,

@@ -20,6 +20,9 @@ class HomeBody extends StatelessWidget {
       case 'Hesap (Nakit)!':
         return "credit-card";
         break;
+      case 'Hesap (Kart)!':
+        return "credit-card";
+        break;
       case 'Sipariş Hazır!':
         return "mobile_basket";
         break;
@@ -37,6 +40,9 @@ class HomeBody extends StatelessWidget {
         return Color(0xFFFFE5E6);
         break;
       case 'Hesap (Nakit)!':
+        return Color(0xFFD9F5F8);
+        break;
+      case 'Hesap (Kart)!':
         return Color(0xFFD9F5F8);
         break;
       case 'Sipariş Hazır!':
@@ -117,6 +123,7 @@ class HomeBody extends StatelessWidget {
                             IconButton(
                               onPressed: () {
                                 print(auth.currentUser.displayName);
+                                print(auth.currentUser.email);
                               },
                               icon: SvgPicture.asset(
                                 "assets/icons/tick.svg",

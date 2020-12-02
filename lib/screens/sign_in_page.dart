@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
@@ -33,12 +34,14 @@ class SignInPage extends StatelessWidget {
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.person),
                     textEditingController: emailController,
+                    textInputType: TextInputType.emailAddress,
                   ),
                   SizedBox(height: getProportionateScreenHeight(20.0)),
                   SignInputArea(
                     labelText: 'Parola',
                     prefixIcon: Icon(Icons.lock),
                     textEditingController: passwordController,
+                    obsecure: true,
                   ),
                   Text(
                     'Şifremi unuttum',
@@ -64,8 +67,16 @@ class SignInPage extends StatelessWidget {
               CustomFlatIconButton(
                 wordThree: 'giriş ',
                 wordFour: 'yap',
-                onPressed: () {
-                  print('Sokayım sana');
+                onPressed: () async {
+                  await context
+                      .read<AuthenticationService>()
+                      .signInWithGoogle();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
                 },
               ),
               SizedBox(height: getProportionateScreenHeight(120.0)),
