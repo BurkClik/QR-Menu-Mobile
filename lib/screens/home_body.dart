@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,14 @@ import 'package:qr_mobile/demo.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 
-class HomeBody extends StatelessWidget {
+class HomeBody extends StatefulWidget {
+  @override
+  _HomeBodyState createState() => _HomeBodyState();
+}
+
+class _HomeBodyState extends State<HomeBody> {
   final GlobalKey<AnimatedListState> _key = GlobalKey();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  final CollectionReference orders =
-      FirebaseFirestore.instance.collection('Orders');
 
   String orderFirebaseIcon(String order) {
     switch (order) {
@@ -56,6 +60,17 @@ class HomeBody extends StatelessWidget {
     }
   }
 
+  int orderFirebaseTime(int order) {
+    // TODO: The difference should be dynamic.
+    var date = DateTime.now();
+    /* Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {});
+    }); */
+    Duration difference =
+        date.difference(DateTime.fromMicrosecondsSinceEpoch(order * 1000));
+    return difference.inMinutes;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -72,7 +87,10 @@ class HomeBody extends StatelessWidget {
           ),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-              stream: orders.snapshots(),
+              stream: FirebaseFirestore.instance
+                  .collection('Orders')
+                  .orderBy("time", descending: true)
+                  .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -83,6 +101,7 @@ class HomeBody extends StatelessWidget {
                 }
 
                 return new ListView(
+                  physics: BouncingScrollPhysics(),
                   children: snapshot.data.docs.map((DocumentSnapshot document) {
                     return new Padding(
                       padding: EdgeInsets.only(
@@ -115,7 +134,7 @@ class HomeBody extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "${document.data()['time']} dakika",
+                                  "${orderFirebaseTime(document.data()['time'])} dakika",
                                   style: kOrderTimeText,
                                 )
                               ],

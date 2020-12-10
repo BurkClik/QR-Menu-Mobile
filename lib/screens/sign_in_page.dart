@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile/screens/home_page.dart';
+import 'package:qr_mobile/screens/sign_up_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
@@ -104,7 +105,8 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushNamed('/signUp');
+                        Navigator.of(context)
+                            .push(_enterExitRoute(this, SignUpPage()));
                       },
                     ),
                   ],
@@ -116,4 +118,26 @@ class SignInPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Route _enterExitRoute(Widget exitPage, Widget enterPage) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => enterPage,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+        Stack(
+      children: [
+        SlideTransition(
+          position:
+              Tween<Offset>(begin: Offset(0.0, 0.0), end: Offset(-1.0, 0.0))
+                  .animate(animation),
+          child: exitPage,
+        ),
+        SlideTransition(
+          position: Tween<Offset>(begin: Offset(1.0, 0.0), end: Offset.zero)
+              .animate(animation),
+          child: enterPage,
+        ),
+      ],
+    ),
+  );
 }

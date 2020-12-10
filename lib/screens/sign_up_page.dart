@@ -19,6 +19,13 @@ class SignUpPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: kPrimaryColor,
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -104,7 +111,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.of(context).pushNamed('/signIn');
+                        Navigator.of(context).pop();
                       },
                     ),
                   ],
