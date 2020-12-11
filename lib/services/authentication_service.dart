@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qr_mobile/services/database_service.dart';
 
 class AuthenticationService {
   final FirebaseAuth _firebaseAuth;
@@ -33,10 +35,12 @@ class AuthenticationService {
           email: email, password: password);
       var user = _firebaseAuth.currentUser;
       if (user != null) {
-        user.updateProfile(displayName: name);
+        await user.updateProfile(displayName: name);
+        await DatabaseService(name, email, user.uid).addStaff();
       }
       return 'Signed up';
     } catch (e) {
+      print("Hata");
       return e.message;
     }
   }

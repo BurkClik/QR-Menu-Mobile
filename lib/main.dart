@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile/routs.dart';
+import 'package:qr_mobile/screens/admin_page.dart';
 import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/screens/sign_in_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
@@ -41,12 +43,33 @@ class MyApp extends StatelessWidget {
 
 class AuthenticationWrapper extends StatelessWidget {
   static String routeName = '/checkAuth';
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final firebaseUser = context.watch<User>();
     if (firebaseUser != null) {
-      return HomePage();
+      var uid = firebaseUser.uid;
+      print(uid);
+      return FutureBuilder<DocumentSnapshot>(
+        future: FirebaseFirestore.instance.collection('Staff').doc(uid).get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data = snapshot.data.data();
+            if (data['title'] == "garson") {
+              return HomePage();
+            }
+            return Admin();
+          }
+
+          return CircularProgressIndicator();
+        },
+      );
     }
     return SignInPage();
   }

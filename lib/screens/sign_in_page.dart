@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/screens/sign_up_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
+import 'package:qr_mobile/services/database_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 import 'package:qr_mobile/widgets/custom_flat_icon_button.dart';

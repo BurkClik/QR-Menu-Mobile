@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
                   .then((value) {
                 if (value[0] == "password") {
                   context.read<AuthenticationService>().signOut();
+                  Navigator.of(context).pushReplacementNamed("/signIn");
                 } else {
                   context.read<AuthenticationService>().googleignOut();
                   Navigator.of(context).pushReplacementNamed("/signIn");

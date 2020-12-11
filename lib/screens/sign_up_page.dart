@@ -83,7 +83,7 @@ class SignUpPage extends StatelessWidget {
                 wordThree: 'kayıt ',
                 wordFour: 'ol',
                 onPressed: () {
-                  print('Sokayım sana');
+                  print('Google');
                 },
               ),
               SizedBox(height: getProportionateScreenHeight(120.0)),
