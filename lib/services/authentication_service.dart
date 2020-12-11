@@ -40,7 +40,6 @@ class AuthenticationService {
       }
       return 'Signed up';
     } catch (e) {
-      print("Hata");
       return e.message;
     }
   }

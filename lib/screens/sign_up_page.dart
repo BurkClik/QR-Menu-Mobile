@@ -15,6 +15,8 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,44 +37,58 @@ class SignUpPage extends StatelessWidget {
               Text('Hesap Oluştur,', style: kWelcomeText),
               Text('Başlamak için kayıt olun!', style: kWelcomeHintText),
               SizedBox(height: getProportionateScreenHeight(100.0)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SignInputArea(
-                    labelText: 'İsim Soyisim',
-                    prefixIcon: Icon(Icons.person),
-                    textEditingController: nameController,
-                  ),
-                  SizedBox(height: getProportionateScreenHeight(20.0)),
-                  SignInputArea(
-                    labelText: 'Email',
-                    prefixIcon: Icon(Icons.mail),
-                    textEditingController: emailController,
-                  ),
-                  SizedBox(height: getProportionateScreenHeight(20.0)),
-                  SignInputArea(
-                    labelText: 'Parola',
-                    prefixIcon: Icon(Icons.lock),
-                    textEditingController: passwordController,
-                  ),
-                ],
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SignInputArea(
+                      labelText: 'İsim Soyisim',
+                      prefixIcon: Icon(Icons.person),
+                      textInputType: TextInputType.name,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter some text';
+                        }
+                        return null;
+                      },
+                      textEditingController: nameController,
+                    ),
+                    SizedBox(height: getProportionateScreenHeight(20.0)),
+                    SignInputArea(
+                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.mail),
+                      textInputType: TextInputType.emailAddress,
+                      textEditingController: emailController,
+                    ),
+                    SizedBox(height: getProportionateScreenHeight(20.0)),
+                    SignInputArea(
+                      labelText: 'Parola',
+                      prefixIcon: Icon(Icons.lock),
+                      obsecure: true,
+                      textEditingController: passwordController,
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: getProportionateScreenHeight(40)),
               CustomRaisedButton(
                 text: 'Kayıt',
                 onPressed: () async {
                   try {
-                    await context.read<AuthenticationService>().signUp(
-                          email: emailController.text.trim(),
-                          password: passwordController.text.trim(),
-                          name: nameController.text.trim(),
-                        );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                    if (_formKey.currentState.validate()) {
+                      await context.read<AuthenticationService>().signUp(
+                            email: emailController.text.trim(),
+                            password: passwordController.text.trim(),
+                            name: nameController.text.trim(),
+                          );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    }
                   } catch (e) {
                     print(e.message);
                   }
@@ -94,21 +110,12 @@ class SignUpPage extends StatelessWidget {
                   children: [
                     Text(
                       'Zaten bir hesabım var. ',
-                      style: TextStyle(
-                        fontFamily: 'Kodchasan',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12.0,
-                      ),
+                      style: kSignHintText,
                     ),
                     InkWell(
                       child: Text(
                         'Giriş Yap',
-                        style: TextStyle(
-                          fontFamily: 'Kodchasan',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12.0,
-                          color: kPrimaryColor,
-                        ),
+                        style: kSignAuthHintText,
                       ),
                       onTap: () {
                         Navigator.of(context).pop();

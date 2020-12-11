@@ -8,6 +8,7 @@ import 'package:qr_mobile/screens/admin_page.dart';
 import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/screens/sign_in_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
+import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 import 'package:qr_mobile/theme/theme.dart';
 
@@ -18,7 +19,6 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -67,7 +67,13 @@ class AuthenticationWrapper extends StatelessWidget {
             return Admin();
           }
 
-          return CircularProgressIndicator();
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+              ),
+            ),
+          );
         },
       );
     }

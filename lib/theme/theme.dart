@@ -6,14 +6,14 @@ ThemeData theme() {
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: kPrimaryColor,
     scaffoldBackgroundColor: Colors.white,
-    //textButtonTheme: _buttonTextTheme(),
+    appBarTheme: appBarTheme(),
   );
 }
 
-/* TextButtonThemeData _buttonTextTheme() {
-  return TextButtonThemeData(
-    style: ButtonStyle(
-      textStyle: 
-    ),
+AppBarTheme appBarTheme() {
+  return AppBarTheme(
+    centerTitle: true,
+    color: Colors.transparent,
+    elevation: 0,
   );
-} */
+}

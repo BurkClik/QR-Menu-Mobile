@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
+import 'package:qr_mobile/theme/constants.dart';
 
 class Admin extends StatelessWidget {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -10,8 +11,10 @@ class Admin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Admin Page'),
-        centerTitle: true,
+        title: Text(
+          'Cafe 236',
+          style: kAppBarCafeText,
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -27,7 +30,7 @@ class Admin extends StatelessWidget {
                 }
               });
             },
-            icon: Icon(Icons.exit_to_app),
+            icon: Icon(Icons.exit_to_app, color: kPrimaryColor),
           ),
         ],
       ),

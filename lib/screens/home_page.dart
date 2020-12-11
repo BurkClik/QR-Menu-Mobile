@@ -24,17 +24,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         title: Text(
           'Cafe 236',
-          style: TextStyle(
-            fontFamily: 'Cinzel',
-            fontSize: 28,
-            color: Colors.black,
-          ),
+          style: kAppBarCafeText,
         ),
-        centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/screens/sign_up_page.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
-import 'package:qr_mobile/services/database_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 import 'package:qr_mobile/widgets/custom_flat_icon_button.dart';
@@ -63,6 +62,7 @@ class SignInPage extends StatelessWidget {
                   context.read<AuthenticationService>().signIn(
                       email: emailController.text.trim(),
                       password: passwordController.text.trim());
+                  // TODO: Routing'e bak!
                 },
               ),
               SizedBox(height: getProportionateScreenHeight(12)),
@@ -89,21 +89,12 @@ class SignInPage extends StatelessWidget {
                   children: [
                     Text(
                       'Kayıtlı bir hesabım yok. ',
-                      style: TextStyle(
-                        fontFamily: 'Kodchasan',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 12.0,
-                      ),
+                      style: kSignHintText,
                     ),
                     InkWell(
                       child: Text(
                         'Kayıt Olun',
-                        style: TextStyle(
-                          fontFamily: 'Kodchasan',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12.0,
-                          color: kPrimaryColor,
-                        ),
+                        style: kSignAuthHintText,
                       ),
                       onTap: () {
                         Navigator.of(context)

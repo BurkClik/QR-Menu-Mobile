@@ -8,12 +8,14 @@ class SignInputArea extends StatelessWidget {
   final String labelText;
   final TextInputType textInputType;
   final bool obsecure;
+  final String Function(String) validator;
 
   SignInputArea(
       {this.textEditingController,
       this.labelText,
       this.prefixIcon,
       this.textInputType,
+      this.validator,
       obsecure})
       : obsecure = obsecure ?? false;
 
@@ -22,10 +24,12 @@ class SignInputArea extends StatelessWidget {
     return Container(
       width: getProportionateScreenWidth(304),
       height: getProportionateScreenHeight(48),
-      child: TextField(
+      child: TextFormField(
         keyboardType: textInputType,
+        autocorrect: false,
         obscureText: obsecure,
         controller: textEditingController,
+        validator: validator,
         decoration: InputDecoration(
           prefixIcon: prefixIcon,
           labelText: labelText,

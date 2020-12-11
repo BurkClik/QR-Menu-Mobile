@@ -5,6 +5,15 @@ const kPrimaryColor = Color(0xFFF93F7E);
 const kSecondColor = Color(0xFFFC8B8E);
 
 //==================================
+// AppBar
+//==================================
+const kAppBarCafeText = TextStyle(
+  fontFamily: 'Cinzel',
+  fontSize: 28,
+  color: Colors.black,
+);
+
+//==================================
 // Sign In and Out
 //==================================
 const kBlackWithOpacity = Color(0x80000000);
@@ -38,6 +47,19 @@ const kSignInOutText = TextStyle(
   fontFamily: 'Kodchasan',
   fontWeight: FontWeight.w600,
   fontSize: 20.0,
+);
+
+const kSignHintText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  fontSize: 12.0,
+);
+
+const kSignAuthHintText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  fontSize: 12.0,
+  color: kPrimaryColor,
 );
 
 //====================================
