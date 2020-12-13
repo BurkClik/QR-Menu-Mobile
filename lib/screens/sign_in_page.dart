@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qr_mobile/screens/home_page.dart';
@@ -8,6 +10,8 @@ import 'package:qr_mobile/theme/size_config.dart';
 import 'package:qr_mobile/widgets/custom_flat_icon_button.dart';
 import 'package:qr_mobile/widgets/custom_raised_button.dart';
 import 'package:qr_mobile/widgets/sign_input_area.dart';
+
+import 'admin_page.dart';
 
 class SignInPage extends StatelessWidget {
   static String routeName = '/signIn';
@@ -58,7 +62,7 @@ class SignInPage extends StatelessWidget {
               SizedBox(height: getProportionateScreenHeight(40)),
               CustomRaisedButton(
                 text: 'Giriş',
-                onPressed: () {
+                onPressed: () async {
                   context.read<AuthenticationService>().signIn(
                       email: emailController.text.trim(),
                       password: passwordController.text.trim());

@@ -5,6 +5,7 @@ import 'package:qr_mobile/services/authentication_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 
 class Admin extends StatelessWidget {
+  static String routeName = '/admin';
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
@@ -36,7 +37,7 @@ class Admin extends StatelessWidget {
       ),
       body: Container(
         child: Center(
-          child: Text('Selam'),
+          child: Text('Admin Page'),
         ),
       ),
     );

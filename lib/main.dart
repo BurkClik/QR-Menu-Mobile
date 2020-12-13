@@ -50,7 +50,6 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     if (firebaseUser != null) {
       var uid = firebaseUser.uid;
-      print(uid);
       return FutureBuilder<DocumentSnapshot>(
         future: FirebaseFirestore.instance.collection('Staff').doc(uid).get(),
         builder:
