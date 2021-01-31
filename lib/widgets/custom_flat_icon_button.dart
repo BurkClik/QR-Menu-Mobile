@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 
 class CustomFlatIconButton extends StatelessWidget {
@@ -13,7 +12,7 @@ class CustomFlatIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton.icon(
       onPressed: onPressed,
-      icon: SvgPicture.asset(
+      icon: Image.asset(
         "assets/icons/google.svg",
         width: 24,
         height: 24,

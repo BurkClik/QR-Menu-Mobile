@@ -2,8 +2,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:qr_mobile/demo.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 
@@ -117,7 +115,7 @@ class _HomeBodyState extends State<HomeBody> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SvgPicture.asset(
+                            Image.asset(
                               "assets/icons/${orderFirebaseIcon(document.data()['orderType'])}.svg",
                               width: 52,
                               height: 52,
@@ -144,7 +142,7 @@ class _HomeBodyState extends State<HomeBody> {
                                 print(auth.currentUser.displayName);
                                 print(auth.currentUser.email);
                               },
-                              icon: SvgPicture.asset(
+                              icon: Image.asset(
                                 "assets/icons/tick.svg",
                                 width: 32,
                                 height: 32,

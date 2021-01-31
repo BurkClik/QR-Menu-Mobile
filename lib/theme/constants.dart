@@ -90,3 +90,41 @@ const kOrderTimeText = TextStyle(
   fontSize: 12,
   color: kBlackWithOpacity,
 );
+
+//========================
+// Admin Page
+//========================
+const kDrawerText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  color: kPrimaryColor,
+);
+
+//========================
+// Admin Home
+//========================
+const kDailyText = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w700,
+  fontSize: 16,
+  color: Color(0xFFD133B8),
+);
+
+const kDailyTextCount = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w600,
+  fontSize: 32,
+);
+
+const kTableTitle = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontWeight: FontWeight.w700,
+  fontSize: 16.0,
+  color: Color(0xFF3398D1),
+);
+
+const kTableCellStyle = TextStyle(
+  fontFamily: 'Kodchasan',
+  fontSize: 12.0,
+  fontWeight: FontWeight.w800,
+);
