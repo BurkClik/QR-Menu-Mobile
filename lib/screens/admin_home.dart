@@ -66,6 +66,43 @@ class AdminHome extends StatelessWidget {
                   buildTableRow(),
                   buildTableRow(),
                   buildTableRow(),
+                ],
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(width: 2, color: Color(0xFFFC8B8E)),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+            child: Text(
+              'Stok Bilgisi',
+              style: TextStyle(
+                fontFamily: 'Kodchasan',
+                fontWeight: FontWeight.w800,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Container(
+              child: Table(
+                border: TableBorder.all(
+                    color: Colors.black, style: BorderStyle.none),
+                children: [
+                  TableRow(children: [
+                    TableCell(
+                        child: Center(child: Text('', style: kTableTitle))),
+                    TableCell(
+                        child: Center(child: Text('Ürün', style: kTableTitle))),
+                    TableCell(
+                        child: Center(child: Text('Adet', style: kTableTitle))),
+                  ]),
+                  buildTableRow(),
+                  buildTableRow(),
                   buildTableRow(),
                 ],
               ),

@@ -70,8 +70,8 @@ class _AdminState extends State<Admin> {
           ),
         ),
       ),
-      body: Container(
-        child: Center(
+      body: SafeArea(
+        child: Container(
           child: adminPages[initialPage],
         ),
       ),
