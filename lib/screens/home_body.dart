@@ -116,7 +116,7 @@ class _HomeBodyState extends State<HomeBody> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Image.asset(
-                              "assets/icons/${orderFirebaseIcon(document.data()['orderType'])}.svg",
+                              "assets/icons/${orderFirebaseIcon(document.data()['orderType'])}.png",
                               width: 52,
                               height: 52,
                             ),
@@ -143,7 +143,7 @@ class _HomeBodyState extends State<HomeBody> {
                                 print(auth.currentUser.email);
                               },
                               icon: Image.asset(
-                                "assets/icons/tick.svg",
+                                "assets/icons/tick.png",
                                 width: 32,
                                 height: 32,
                                 color: Color(0xFF019A5A),

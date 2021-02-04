@@ -14,6 +14,7 @@ class SignUpPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -56,6 +57,13 @@ class SignUpPage extends StatelessWidget {
                     ),
                     SizedBox(height: getProportionateScreenHeight(20.0)),
                     SignInputArea(
+                      labelText: 'Telefon',
+                      prefixIcon: Icon(Icons.phone),
+                      textInputType: TextInputType.phone,
+                      textEditingController: phoneController,
+                    ),
+                    SizedBox(height: getProportionateScreenHeight(20.0)),
+                    SignInputArea(
                       labelText: 'Email',
                       prefixIcon: Icon(Icons.mail),
                       textInputType: TextInputType.emailAddress,
@@ -81,6 +89,7 @@ class SignUpPage extends StatelessWidget {
                             email: emailController.text.trim(),
                             password: passwordController.text.trim(),
                             name: nameController.text.trim(),
+                            phoneNumber: phoneController.text.trim(),
                           );
                       Navigator.push(
                         context,
@@ -102,26 +111,27 @@ class SignUpPage extends StatelessWidget {
                   print('Google');
                 },
               ),
-              SizedBox(height: getProportionateScreenHeight(120.0)),
-              Container(
-                width: getProportionateScreenWidth(308.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Zaten bir hesabım var. ',
-                      style: kSignHintText,
-                    ),
-                    InkWell(
-                      child: Text(
-                        'Giriş Yap',
-                        style: kSignAuthHintText,
+              Expanded(
+                child: Container(
+                  width: getProportionateScreenWidth(308.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Zaten bir hesabım var. ',
+                        style: kSignHintText,
                       ),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
+                      InkWell(
+                        child: Text(
+                          'Giriş Yap',
+                          style: kSignAuthHintText,
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

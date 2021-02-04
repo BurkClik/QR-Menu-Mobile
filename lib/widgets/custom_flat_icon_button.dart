@@ -13,7 +13,7 @@ class CustomFlatIconButton extends StatelessWidget {
     return FlatButton.icon(
       onPressed: onPressed,
       icon: Image.asset(
-        "assets/icons/google.svg",
+        "assets/icons/google.png",
         width: 24,
         height: 24,
       ),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:qr_mobile/services/database_service.dart';
 
@@ -28,14 +29,15 @@ class AuthenticationService {
     }
   }
 
-  Future<String> signUp({String email, String password, String name}) async {
+  Future<String> signUp(
+      {String email, String password, String name, String phoneNumber}) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       var user = _firebaseAuth.currentUser;
       if (user != null) {
         await user.updateProfile(displayName: name);
-        await DatabaseService(name, email, user.uid).addStaff();
+        await DatabaseService(name, email, user.uid, phoneNumber).addStaff();
       }
       return 'Signed up';
     } catch (e) {
@@ -53,5 +55,22 @@ class AuthenticationService {
     );
 
     return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
+  Future<UserCredential> registerUser(
+      {String email, String password, String name, String phoneNumber}) async {
+    FirebaseApp app = await Firebase.initializeApp(
+        name: 'Secondary', options: Firebase.app().options);
+    try {
+      UserCredential userCredential = await FirebaseAuth.instanceFor(app: app)
+          .createUserWithEmailAndPassword(email: email, password: password);
+      await app.delete();
+      var user = _firebaseAuth.currentUser;
+      if (user != null) {
+        await user.updateProfile(displayName: name);
+        await DatabaseService(name, email, user.uid, phoneNumber).addStaff();
+      }
+      return Future.sync(() => userCredential);
+    } on FirebaseAuthException catch (e) {}
   }
 }

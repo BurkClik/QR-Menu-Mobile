@@ -60,7 +60,8 @@ class AuthenticationWrapper extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data = snapshot.data.data();
-            if (data['title'] == "garson") {
+
+            if (data["title"] == "garson") {
               return HomePage();
             }
             return Admin();

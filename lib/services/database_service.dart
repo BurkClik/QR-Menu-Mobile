@@ -4,9 +4,10 @@ class DatabaseService {
   final String fullName;
   final String email;
   final String uid;
+  final String phoneNumber;
   String title;
 
-  DatabaseService(this.fullName, this.email, this.uid);
+  DatabaseService(this.fullName, this.email, this.uid, this.phoneNumber);
 
   CollectionReference staff = FirebaseFirestore.instance.collection('Staff');
 
@@ -15,6 +16,7 @@ class DatabaseService {
         .doc(uid)
         .set({
           'fullName': fullName,
+          'phoneNumber': phoneNumber,
           'email': email,
           'title': 'garson',
         })
