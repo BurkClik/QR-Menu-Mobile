@@ -7,6 +7,7 @@ import 'package:qr_mobile/routs.dart';
 import 'package:qr_mobile/screens/admin_page.dart';
 import 'package:qr_mobile/screens/home_page.dart';
 import 'package:qr_mobile/screens/sign_in_page.dart';
+import 'package:qr_mobile/services/admin_provider.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
@@ -19,6 +20,9 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
+  final int newInitialPage = 0;
+  final List<dynamic> categories = [];
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -29,6 +33,9 @@ class MyApp extends StatelessWidget {
         StreamProvider(
             create: (context) =>
                 context.read<AuthenticationService>().authStateChanges),
+        ListenableProvider<AdminProvider>(
+          create: (_) => AdminProvider(newInitialPage, categories),
+        ),
       ],
       child: MaterialApp(
         title: 'QR Menu Mobile',

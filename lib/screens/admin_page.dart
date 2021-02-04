@@ -6,6 +6,7 @@ import 'package:qr_mobile/screens/admin_menu.dart';
 import 'package:qr_mobile/screens/admin_orders.dart';
 import 'package:qr_mobile/screens/admin_staff.dart';
 import 'package:qr_mobile/screens/admin_stock.dart';
+import 'package:qr_mobile/services/admin_provider.dart';
 import 'package:qr_mobile/services/authentication_service.dart';
 import 'package:qr_mobile/theme/constants.dart';
 
@@ -73,7 +74,7 @@ class _AdminState extends State<Admin> {
       ),
       body: SafeArea(
         child: Container(
-          child: adminPages[initialPage],
+          child: adminPages[context.read<AdminProvider>().initialPage],
         ),
       ),
     );
@@ -86,7 +87,7 @@ class _AdminState extends State<Admin> {
       title: Text(tabName, style: kDrawerText),
       onTap: () {
         setState(() {
-          initialPage = initalPage;
+          context.read<AdminProvider>().changeInitialPage(initalPage);
         });
         Navigator.pop(context);
       },
