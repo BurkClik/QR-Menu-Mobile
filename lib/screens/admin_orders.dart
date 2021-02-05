@@ -127,7 +127,7 @@ class AdminOrders extends StatelessWidget {
                                                   fontSize: 12),
                                             ),
                                             Text(
-                                              '${double.parse(demo['itemList'][index]['item']['price']) * demo['itemList'][index]['piece']}',
+                                              '${(demo['itemList'][index]['item']['price']) * demo['itemList'][index]['piece']}',
                                               style: TextStyle(
                                                   fontFamily: 'Kodchasan',
                                                   fontSize: 12),

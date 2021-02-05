@@ -3,7 +3,7 @@ import 'package:qr_mobile/theme/size_config.dart';
 
 class LastOrder extends StatelessWidget {
   final String url;
-  final String price;
+  final int price;
   final String productName;
   final String status;
 

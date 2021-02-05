@@ -129,6 +129,7 @@ class _AdminHomeState extends State<AdminHome> {
                         itemCount: 2,
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
+                          print(index);
                           return new LastOrder(
                             url: demo['order']['itemList'][0]['item']['image'],
                             price: demo['order']['itemList'][0]['item']
