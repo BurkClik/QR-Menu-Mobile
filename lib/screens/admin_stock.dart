@@ -15,44 +15,6 @@ class AdminStock extends StatefulWidget {
 class _AdminStockState extends State<AdminStock> {
   var quantity = 20;
 
-  Future<void> _showMyDialog(BuildContext context, String docId) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Stok Ekle'),
-          content: Center(
-            child: TextButton(
-              onPressed: () {
-                showMaterialNumberPicker(
-                    minNumber: 100,
-                    maxNumber: 10,
-                    title: 'asdas',
-                    context: context,
-                    selectedNumber: quantity,
-                    onChanged: (value) {
-                      setState(() {
-                        quantity = value;
-                      });
-                    });
-              },
-              child: Text('30'),
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('EKLE'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(

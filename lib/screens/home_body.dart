@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_mobile/services/database_order.dart';
 import 'package:qr_mobile/theme/constants.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 
@@ -79,7 +80,7 @@ class _HomeBodyState extends State<HomeBody> {
           Padding(
             padding: EdgeInsets.only(left: 28.0, bottom: 20.0),
             child: Text(
-              'Son Aktiviteler',
+              '${auth.currentUser.displayName}',
               style: kLastActivitiesText,
             ),
           ),
@@ -131,16 +132,44 @@ class _HomeBodyState extends State<HomeBody> {
                                     style: kOrderDetailText,
                                   ),
                                 ),
-                                Text(
-                                  "${orderFirebaseTime(document.data()['time'])} dakika",
-                                  style: kOrderTimeText,
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Text(
+                                        "${orderFirebaseTime(document.data()['time'])} dakika",
+                                        style: kOrderTimeText,
+                                      ),
+                                    ),
+                                    Container(
+                                      child: Text(
+                                        '${document.data()['status']}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'Kodchasan',
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 12.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      width: 100,
+                                      decoration: BoxDecoration(
+                                        color: kPrimaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    )
+                                  ],
                                 )
                               ],
                             ),
                             IconButton(
-                              onPressed: () {
-                                print(auth.currentUser.displayName);
-                                print(auth.currentUser.email);
+                              onPressed: () async {
+                                try {
+                                  await DatabaseOrder("Tamamlandı")
+                                      .updateOrder(document.id);
+                                } catch (e) {}
                               },
                               icon: Image.asset(
                                 "assets/icons/tick.png",

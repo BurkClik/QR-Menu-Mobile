@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 
 class LastOrder extends StatelessWidget {
+  final String url;
+  final String price;
+  final String productName;
+  final String status;
+
+  LastOrder({this.url, this.price, this.productName, this.status});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 12.0),
+      padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 12.0),
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 16.0),
         child: Row(
@@ -13,8 +20,7 @@ class LastOrder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CircleAvatar(
-              backgroundImage:
-                  NetworkImage("https://source.unsplash.com/random"),
+              backgroundImage: NetworkImage(url),
               radius: 36.0,
             ),
             Padding(
@@ -23,7 +29,7 @@ class LastOrder extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Chicken Burger',
+                    productName,
                     style: TextStyle(
                       fontFamily: 'Kodchasan',
                       fontWeight: FontWeight.w900,
@@ -39,7 +45,7 @@ class LastOrder extends StatelessWidget {
                           horizontal: 24.0,
                         ),
                         child: Text(
-                          'Beklemede',
+                          status,
                           style: TextStyle(
                             fontFamily: 'Kodchasan',
                             fontWeight: FontWeight.w800,
@@ -56,7 +62,7 @@ class LastOrder extends StatelessWidget {
               ),
             ),
             Text(
-              "15₺",
+              "$price₺",
               style: TextStyle(
                 fontFamily: 'Kodchasan',
                 fontSize: 24,

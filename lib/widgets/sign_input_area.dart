@@ -8,6 +8,8 @@ class SignInputArea extends StatelessWidget {
   final String labelText;
   final TextInputType textInputType;
   final bool obsecure;
+  final String hintText;
+  final String prefixText;
   final String Function(String) validator;
 
   SignInputArea(
@@ -16,6 +18,8 @@ class SignInputArea extends StatelessWidget {
       this.prefixIcon,
       this.textInputType,
       this.validator,
+      this.prefixText,
+      this.hintText,
       obsecure})
       : obsecure = obsecure ?? false;
 
@@ -31,8 +35,10 @@ class SignInputArea extends StatelessWidget {
         controller: textEditingController,
         validator: validator,
         decoration: InputDecoration(
+          prefixText: prefixText,
           prefixIcon: prefixIcon,
           labelText: labelText,
+          hintText: hintText,
           labelStyle: kSignInputLabel,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),

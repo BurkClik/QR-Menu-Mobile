@@ -1,12 +1,85 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_mobile/screens/admin_add_item.dart';
 import 'package:qr_mobile/services/admin_provider.dart';
 import 'package:qr_mobile/theme/size_config.dart';
 import 'package:provider/provider.dart';
+import 'package:qr_mobile/widgets/sign_input_area.dart';
 
-class AdminMenu extends StatelessWidget {
+class AdminMenu extends StatefulWidget {
+  @override
+  _AdminMenuState createState() => _AdminMenuState();
+}
+
+class _AdminMenuState extends State<AdminMenu> {
   List<dynamic> demo = [];
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> _showMyDialog(String url, String productName, int productPrice,
+      String documentID, String key) async {
+    TextEditingController priceController = TextEditingController();
+    TextEditingController nameController = TextEditingController();
+
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: Text('Bilgileri Güncelle')),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Container(
+                  height: 160,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(url),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 4),
+                          blurRadius: 4,
+                          color: Colors.black.withOpacity(0.25),
+                        )
+                      ]),
+                ),
+                SizedBox(height: 10),
+                SignInputArea(
+                  prefixIcon: Icon(Icons.restaurant_menu),
+                  hintText: productName,
+                  textEditingController: nameController,
+                ),
+                SizedBox(height: 10),
+                SignInputArea(
+                  prefixIcon: Icon(Icons.lock),
+                  hintText: '$productPrice₺',
+                  textEditingController: priceController,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Onayla'),
+              onPressed: () async {
+                /*    await FirebaseFirestore.instance
+                    .collection('Menu')
+                    .doc(documentID)
+                    .update({
+                  key: FieldValue.arrayUnion([productName, productPrice])
+                }); */
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +188,19 @@ class AdminMenu extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            trailing: Icon(
-                              Icons.settings,
-                              color: Color(0xFFFC8B8E),
+                            trailing: IconButton(
+                              icon: Icon(Icons.settings,
+                                  color: Color(0xFFFC8B8E)),
+                              onPressed: () {
+                                print(menu.values.elementAt(index)['image']);
+                                _showMyDialog(
+                                  menu.values.elementAt(index)['image'],
+                                  menu.values.elementAt(index)['name'],
+                                  menu.values.elementAt(index)['price'],
+                                  document.id,
+                                  key,
+                                );
+                              },
                             ),
                           );
                         });

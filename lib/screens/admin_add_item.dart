@@ -122,7 +122,6 @@ class _AdminAddItemState extends State<AdminAddItem> {
                     child: Text(
                       'KATEGORİ EKLE',
                       style: TextStyle(
-                        color: Colors.black,
                         fontFamily: 'Kodchasan',
                         fontWeight: FontWeight.w700,
                       ),
@@ -170,7 +169,7 @@ class _AdminAddItemState extends State<AdminAddItem> {
                 width: getProportionateScreenWidth(304),
                 child: _image != null
                     ? Image.file(_image, fit: BoxFit.fill)
-                    : NetworkImage("https://source.unsplash.com/random"),
+                    : Image.asset("assets/icons/default_img.png"),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -210,7 +209,6 @@ class _AdminAddItemState extends State<AdminAddItem> {
                   fontFamily: 'Kodchasan',
                   fontSize: 24,
                   fontWeight: FontWeight.w800,
-                  color: Colors.black,
                 ),
               ),
               style: ElevatedButton.styleFrom(
